@@ -155,12 +155,6 @@ function App() {
         </div>
       </header>
 
-      {/* AMBER BANNER STRIP */}
-      <div className="bg-[#2a2012] border-b border-[#4d3a21] text-[#c9a15f] py-1.5 px-4 text-[10px] flex items-center gap-2 shrink-0 overflow-hidden">
-        <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#c9a15f] animate-pulse" />
-        <span className="truncate">Static snapshot of a real extraction — every figure below came from the model, but nothing here is live and the copilot needs a running server.</span>
-      </div>
-
       {/* SECONDARY SUB-HEADER BAR */}
       <div className="h-11 border-b border-[#2c2520] px-4 flex items-center justify-between bg-[#0b0908] shrink-0">
         <div className="flex items-center gap-1.5 text-xs">

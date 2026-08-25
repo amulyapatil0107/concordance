@@ -141,8 +141,6 @@ function App() {
             <span className="font-bold text-xs tracking-wider">Concordance — semantic layer interface</span>
             <ChevronDown size={11} className="text-[#968a80]" />
           </div>
-          <div className="h-4 w-px bg-[#2c2520]" />
-          <span className="text-[#968a80] italic text-[10px]">Content is user-generated and unverified.</span>
         </div>
 
         <div className="flex items-center gap-3">

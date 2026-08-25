@@ -26,7 +26,6 @@ import {
 function App() {
   const [activeScreen, setActiveScreen] = useState<'overview' | 'model' | 'requirements' | 'reconcile' | 'review'>('model');
   const [isCopilotOpen, setIsCopilotOpen] = useState(true);
-  const [isDarkMode, setIsDarkMode] = useState(true);
   
   // Model Screen state
   const [modelSearch, setModelSearch] = useState('');
@@ -132,7 +131,7 @@ function App() {
   });
 
   return (
-    <div className={`min-h-screen flex flex-col font-mono text-xs overflow-hidden select-none ${isDarkMode ? '' : 'light'} bg-bg-primary text-text-primary`}>
+    <div className="min-h-screen flex flex-col font-mono text-xs overflow-hidden select-none bg-bg-primary text-text-primary">
       
       {/* GLOBAL TOP-MOST BAR */}
       <header className="h-10 border-b border-border-subtle px-4 flex items-center justify-between shrink-0 bg-bg-tertiary">
@@ -170,13 +169,6 @@ function App() {
           >
             <Sparkles size={10} />
             <span>copilot</span>
-          </button>
-          
-          <button 
-            onClick={() => setIsDarkMode(!isDarkMode)}
-            className="px-2.5 py-0.5 rounded border border-border-subtle text-text-secondary hover:text-text-primary text-[10px] bg-bg-secondary cursor-pointer"
-          >
-            {isDarkMode ? 'light' : 'dark'}
           </button>
         </div>
       </div>

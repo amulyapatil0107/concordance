@@ -99,8 +99,12 @@ function App() {
         reply = COPILOT_RESPONSES["what does oos rate measure?"];
       } else if (cleanText.includes('performed') || (cleanText.includes('tests') && cleanText.includes('break')) || (cleanText.includes('change') && cleanText.includes('tests'))) {
         reply = COPILOT_RESPONSES["what breaks if i change tests performed?"];
-      } else if (cleanText.includes('join') || cleanText.includes('inactive') || cleanText.includes('relationship') || cleanText.includes('connect')) {
+      } else if ((cleanText.includes('how many') || cleanText.includes('number of') || cleanText.includes('count')) && cleanText.includes('join')) {
+        reply = "Checking extraction metadata...\n\nThere are **6 joins** (relationships) defined in the QualityControl semantic model connecting your 6 user tables.";
+      } else if (cleanText.includes('inactive') || (cleanText.includes('join') && cleanText.includes('inactive')) || cleanText.includes('which joins') || cleanText.includes('which join')) {
         reply = COPILOT_RESPONSES["which joins are inactive?"];
+      } else if (cleanText.includes('join') || cleanText.includes('relationship') || cleanText.includes('connect')) {
+        reply = "There are **6 joins** extracted in total. All of them are active, except for the relationship pathway between `Batch` and `Calendar` which is marked inactive (REQ-B-58c38b).";
       }
 
       setChatLog(prev => {

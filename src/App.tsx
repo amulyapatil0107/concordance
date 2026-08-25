@@ -92,14 +92,15 @@ function App() {
     setChatLog(prev => [...prev, { sender: 'copilot', text: 'Analyzing semantic graph...', isThinking: true }]);
 
     setTimeout(() => {
-      let reply = "I couldn't find a direct correlation in the current semantic graph. Try asking: \"What does OOS Rate measure?\" or \"What breaks if I change Tests Performed?\"";
+      let reply = "I couldn't find a direct correlation in the current semantic graph. Try asking: \"What does OOS Rate measure?\" or \"What breaks if I change Tests Performed?\" or \"Which joins are inactive?\"";
       
-      // Basic fuzzy matching
-      for (const [key, responseValue] of Object.entries(COPILOT_RESPONSES)) {
-        if (cleanText.includes(key)) {
-          reply = responseValue;
-          break;
-        }
+      // Robust keyword matching to support typos, singulars/plurals, and partial questions
+      if (cleanText.includes('oos') || cleanText.includes('out of spec') || cleanText.includes('out-of-spec')) {
+        reply = COPILOT_RESPONSES["what does oos rate measure?"];
+      } else if (cleanText.includes('performed') || (cleanText.includes('tests') && cleanText.includes('break')) || (cleanText.includes('change') && cleanText.includes('tests'))) {
+        reply = COPILOT_RESPONSES["what breaks if i change tests performed?"];
+      } else if (cleanText.includes('join') || cleanText.includes('inactive') || cleanText.includes('relationship') || cleanText.includes('connect')) {
+        reply = COPILOT_RESPONSES["which joins are inactive?"];
       }
 
       setChatLog(prev => {

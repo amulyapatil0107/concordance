@@ -132,14 +132,14 @@ function App() {
   });
 
   return (
-    <div className={`min-h-screen flex flex-col font-mono text-xs overflow-hidden select-none ${isDarkMode ? 'bg-[#0d0b0a] text-[#f7f4f0]' : 'bg-[#f5f2eb] text-[#0d0b0a] transition-all'}`}>
+    <div className={`min-h-screen flex flex-col font-mono text-xs overflow-hidden select-none ${isDarkMode ? '' : 'light'} bg-bg-primary text-text-primary`}>
       
       {/* GLOBAL TOP-MOST BAR */}
-      <header className="h-10 border-b border-[#2c2520] px-4 flex items-center justify-between shrink-0 bg-[#080706]">
+      <header className="h-10 border-b border-border-subtle px-4 flex items-center justify-between shrink-0 bg-bg-tertiary">
         <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1.5 text-[#c9a15f] hover:text-[#e5ba73] cursor-pointer">
+          <div className="flex items-center gap-1.5 text-accent-gold hover:opacity-85 cursor-pointer">
             <span className="font-bold text-xs tracking-wider">Concordance — semantic layer interface</span>
-            <ChevronDown size={11} className="text-[#968a80]" />
+            <ChevronDown size={11} className="text-text-secondary" />
           </div>
         </div>
 
@@ -147,26 +147,26 @@ function App() {
           <div className="w-6 h-6 rounded-full bg-[#5d3ab7] text-white flex items-center justify-center font-bold text-[10px] cursor-pointer" title="User Profile">
             AP
           </div>
-          <button className="text-[10px] text-[#968a80] hover:text-[#f7f4f0] bg-[#1a1614] border border-[#2c2520] px-2 py-0.5 rounded">
+          <button className="text-[10px] text-text-secondary hover:text-text-primary bg-bg-secondary border border-border-subtle px-2 py-0.5 rounded">
             Share
           </button>
         </div>
       </header>
 
       {/* SECONDARY SUB-HEADER BAR */}
-      <div className="h-11 border-b border-[#2c2520] px-4 flex items-center justify-between bg-[#0b0908] shrink-0">
+      <div className="h-11 border-b border-border-subtle px-4 flex items-center justify-between bg-bg-tertiary shrink-0">
         <div className="flex items-center gap-1.5 text-xs">
-          <span className="text-[#69615a]">Concordance</span>
-          <span className="text-[#2c2520]">|</span>
-          <span className="text-[#f7f4f0] font-bold">QualityControl</span>
+          <span className="text-text-secondary">Concordance</span>
+          <span className="text-border-subtle">|</span>
+          <span className="text-text-primary font-bold">QualityControl</span>
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="text-[#968a80] text-[10px]">20 measures · 6 joins</span>
+          <span className="text-text-secondary text-[10px]">20 measures · 6 joins</span>
           
           <button 
             onClick={() => setIsCopilotOpen(!isCopilotOpen)}
-            className={`flex items-center gap-1 px-2.5 py-0.5 rounded border text-[10px] transition-all font-semibold ${isCopilotOpen ? 'bg-[#0f2d24] border-[#10b981] text-[#34d399]' : 'bg-[#1a1614] border-[#2c2520] text-[#968a80]'}`}
+            className={`flex items-center gap-1 px-2.5 py-0.5 rounded border text-[10px] transition-all font-semibold ${isCopilotOpen ? 'bg-brand-green-bg border-brand-green-border text-brand-green-text' : 'bg-bg-secondary border-border-subtle text-text-secondary'}`}
           >
             <Sparkles size={10} />
             <span>copilot</span>
@@ -174,7 +174,7 @@ function App() {
           
           <button 
             onClick={() => setIsDarkMode(!isDarkMode)}
-            className="px-2.5 py-0.5 rounded border border-[#2c2520] text-[#968a80] hover:text-[#f7f4f0] text-[10px] bg-[#1a1614]"
+            className="px-2.5 py-0.5 rounded border border-border-subtle text-text-secondary hover:text-text-primary text-[10px] bg-bg-secondary cursor-pointer"
           >
             {isDarkMode ? 'light' : 'dark'}
           </button>
@@ -185,7 +185,7 @@ function App() {
       <div className="flex-1 flex overflow-hidden">
         
         {/* SIDEBAR NAVIGATION */}
-        <nav className="w-[150px] border-r border-[#2c2520] bg-[#0b0a09] flex flex-col justify-between shrink-0 p-3">
+        <nav className="w-[150px] border-r border-border-subtle bg-bg-tertiary flex flex-col justify-between shrink-0 p-3">
           <div className="space-y-1">
             {[
               { id: 'overview', label: 'Overview' },
@@ -199,7 +199,7 @@ function App() {
                 <button
                   key={item.id}
                   onClick={() => setActiveScreen(item.id as any)}
-                  className={`w-full text-left px-2 py-1.5 rounded transition-all text-xs ${active ? 'bg-[#1e1914] text-[#c9a15f] font-bold border-l-2 border-[#c9a15f]' : 'text-[#968a80] hover:text-[#f7f4f0] hover:bg-[#12100f]'}`}
+                  className={`w-full text-left px-2 py-1.5 rounded transition-all text-xs ${active ? 'bg-bg-secondary text-accent-gold font-bold border-l-2 border-accent-gold' : 'text-text-secondary hover:text-text-primary hover:bg-bg-secondary'}`}
                 >
                   {item.label}
                 </button>
@@ -207,21 +207,21 @@ function App() {
             })}
           </div>
 
-          <div className="p-2 bg-[#0e0d0c] rounded border border-[#2c2520] text-[8px] text-[#69615a] space-y-0.5">
-            <div>ENGINE: <span className="text-[#968a80]">tmdl-v2</span></div>
-            <div>VER: <span className="text-[#968a80]">0.42.1</span></div>
+          <div className="p-2 bg-bg-secondary rounded border border-border-subtle text-[8px] text-text-secondary space-y-0.5">
+            <div>ENGINE: <span className="text-text-primary">tmdl-v2</span></div>
+            <div>VER: <span className="text-text-primary">0.42.1</span></div>
           </div>
         </nav>
 
         {/* MAIN PANEL CONTENT */}
-        <main className="flex-1 overflow-y-auto bg-[#0d0b0a] flex flex-col p-6 min-w-0 select-text">
+        <main className="flex-1 overflow-y-auto bg-bg-primary flex flex-col p-6 min-w-0 select-text">
           
           {/* SCREEN 1: OVERVIEW */}
           {activeScreen === 'overview' && (
             <div className="space-y-6 max-w-5xl">
               <div>
-                <h1 className="text-lg font-bold text-[#f7f4f0] tracking-wide">QualityControl</h1>
-                <p className="text-[#968a80] mt-0.5 text-xs">tmdl · 6 user tables of {OVERVIEW_STATS.tables}</p>
+                <h1 className="text-lg font-bold text-text-primary tracking-wide">QualityControl</h1>
+                <p className="text-text-secondary mt-0.5 text-xs">tmdl · 6 user tables of {OVERVIEW_STATS.tables}</p>
               </div>
 
               {/* 6 Stats row */}
@@ -234,9 +234,9 @@ function App() {
                   { label: 'HIERARCHIES', val: OVERVIEW_STATS.hierarchies },
                   { label: 'NEEDS REVIEW', val: OVERVIEW_STATS.needsReview, alert: true }
                 ].map((stat, i) => (
-                  <div key={i} className="p-3 bg-[#131110] border border-[#2c2520] rounded flex flex-col justify-between min-h-[70px]">
-                    <div className="text-[9px] text-[#968a80] tracking-wider font-semibold uppercase">{stat.label}</div>
-                    <div className={`text-xl font-bold mt-1 tabular-nums ${stat.alert ? 'text-[#c9a15f]' : 'text-[#f7f4f0]'}`}>
+                  <div key={i} className="p-3 bg-bg-panel border border-border-subtle rounded flex flex-col justify-between min-h-[70px]">
+                    <div className="text-[9px] text-text-secondary tracking-wider font-semibold uppercase">{stat.label}</div>
+                    <div className={`text-xl font-bold mt-1 tabular-nums ${stat.alert ? 'text-accent-gold' : 'text-text-primary'}`}>
                       {stat.val}
                     </div>
                   </div>
@@ -244,34 +244,34 @@ function App() {
               </div>
 
               {/* Warnings panel */}
-              <div className="p-4 bg-[#131110] border border-[#2c2520] rounded space-y-2">
-                <div className="text-[9px] text-[#968a80] tracking-wider uppercase font-bold">WHAT WAS NOT READ OR RESOLVED</div>
-                <div className="text-xs text-[#968a80] bg-[#0d0b0a] p-3 rounded border border-[#2c2520] font-mono leading-relaxed">
+              <div className="p-4 bg-bg-panel border border-border-subtle rounded space-y-2">
+                <div className="text-[9px] text-text-secondary tracking-wider uppercase font-bold">WHAT WAS NOT READ OR RESOLVED</div>
+                <div className="text-xs text-text-secondary bg-bg-code p-3 rounded border border-border-subtle font-mono leading-relaxed">
                   {UNRESOLVED_SECTION.warningText}
                 </div>
               </div>
 
               {/* Awaiting Confirmation (low confidence) */}
               <div className="space-y-3">
-                <div className="text-[9px] text-[#968a80] tracking-wider uppercase font-bold">AWAITING CONFIRMATION ({AWAITING_CONFIRMATION.length})</div>
+                <div className="text-[9px] text-text-secondary tracking-wider uppercase font-bold">AWAITING CONFIRMATION ({AWAITING_CONFIRMATION.length})</div>
                 
                 <div className="space-y-2">
                   {AWAITING_CONFIRMATION.map(item => (
-                    <div key={item.id} className="p-4 bg-[#131110] border border-[#2c2520] rounded flex flex-col gap-2">
+                    <div key={item.id} className="p-4 bg-bg-panel border border-border-subtle rounded flex flex-col gap-2">
                       <div className="flex items-center gap-2">
-                        <span className="text-[#c95f5f] font-bold text-xs">{item.id}</span>
-                        <span className="text-[8px] bg-[#301616] text-[#c95f5f] px-1 py-0.2 rounded border border-[#4f2424] font-semibold uppercase">low</span>
-                        <span className="text-[8px] bg-[#222] text-[#968a80] px-1.5 py-0.2 rounded border border-[#2c2520]">{item.rule}</span>
+                        <span className="text-brand-red-text font-bold text-xs">{item.id}</span>
+                        <span className="text-[8px] bg-brand-red-bg text-brand-red-text px-1 py-0.2 rounded border border-brand-red-border font-semibold uppercase">low</span>
+                        <span className="text-[8px] bg-bg-secondary text-text-secondary px-1.5 py-0.2 rounded border border-border-subtle">{item.rule}</span>
                       </div>
-                      <div className="text-xs text-[#968a80] leading-relaxed" dangerouslySetInnerHTML={{ __html: item.textHtml }} />
-                      <div className="text-[11px] text-[#69615a] italic">{item.explanation}</div>
+                      <div className="text-xs text-text-secondary leading-relaxed" dangerouslySetInnerHTML={{ __html: item.textHtml }} />
+                      <div className="text-[11px] text-text-secondary italic">{item.explanation}</div>
                     </div>
                   ))}
                 </div>
               </div>
 
               {/* Footer */}
-              <div className="pt-6 border-t border-[#2c2520] text-[#69615a] flex items-center justify-between text-[10px]">
+              <div className="pt-6 border-t border-border-subtle text-text-secondary flex items-center justify-between text-[10px]">
                 <span>drift not configured · reconcile configured</span>
               </div>
             </div>
@@ -282,16 +282,16 @@ function App() {
             <div className="flex-1 flex flex-col md:flex-row gap-5 min-h-0">
               
               {/* Expandable Object Tree */}
-              <div className="w-full md:w-[260px] flex flex-col bg-[#131110] border border-[#2c2520] rounded min-h-0 shrink-0">
-                <div className="p-3 border-b border-[#2c2520] space-y-2">
+              <div className="w-full md:w-[260px] flex flex-col bg-bg-panel border border-border-subtle rounded min-h-0 shrink-0">
+                <div className="p-3 border-b border-border-subtle space-y-2">
                   <div className="relative">
-                    <Search className="absolute left-2 top-2 text-[#69615a]" size={11} />
+                    <Search className="absolute left-2 top-2 text-text-secondary" size={11} />
                     <input
                       type="text"
                       placeholder="Filter objects"
                       value={modelSearch}
                       onChange={(e) => setModelSearch(e.target.value)}
-                      className="w-full bg-[#0d0b0a] border border-[#2c2520] rounded pl-7 pr-2.5 py-1 text-xs text-[#f7f4f0] focus:outline-none focus:border-[#c9a15f] placeholder-[#69615a] font-mono"
+                      className="w-full bg-bg-code border border-border-subtle rounded pl-7 pr-2.5 py-1 text-xs text-text-primary focus:outline-none focus:border-accent-gold placeholder-text-secondary font-mono"
                     />
                   </div>
                 </div>
@@ -312,26 +312,26 @@ function App() {
                       <div key={table.name} className="space-y-0.5">
                         <button
                           onClick={() => toggleTableExpand(table.name)}
-                          className="w-full flex items-center justify-between p-1 rounded hover:bg-[#1c1816] text-[#968a80] hover:text-[#f7f4f0]"
+                          className="w-full flex items-center justify-between p-1 rounded hover:bg-bg-secondary text-text-secondary hover:text-text-primary"
                         >
                           <div className="flex items-center gap-1">
-                            <span className="text-[10px] font-mono text-[#69615a] w-3 text-center">
+                            <span className="text-[10px] font-mono text-text-secondary w-3 text-center">
                               {isExpanded ? '−' : '+'}
                             </span>
-                            <span className={`font-semibold ${table.hasMeasures ? 'text-[#c9a15f]' : 'text-[#f7f4f0]'}`}>
+                            <span className={`font-semibold ${table.hasMeasures ? 'text-accent-gold' : 'text-text-primary'}`}>
                               {table.name}
                             </span>
                             {table.hasMeasures && (
-                              <span className="text-[8px] text-[#34d399] bg-[#0c241c] border border-[#10b981] px-1 rounded ml-1 scale-90">
+                              <span className="text-[8px] text-brand-green-text bg-brand-green-bg border border-brand-green-border px-1 rounded ml-1 scale-90">
                                 fx
                               </span>
                             )}
                           </div>
-                          <span className="text-[9px] text-[#69615a] font-mono">{table.childCount}</span>
+                          <span className="text-[9px] text-text-secondary font-mono">{table.childCount}</span>
                         </button>
 
                         {isExpanded && (
-                          <div className="pl-4 border-l border-[#2c2520] ml-2.5 space-y-0.5">
+                          <div className="pl-4 border-l border-border-subtle ml-2.5 space-y-0.5">
                             {filteredChildren.map(child => {
                               const isSelected = selectedObject?.name === child.name && selectedObject?.tableName === table.name;
                               return (
@@ -340,8 +340,8 @@ function App() {
                                   onClick={() => handleObjectSelect(child.name, table.name, child.type)}
                                   className={`w-full flex items-center justify-between px-2 py-0.5 rounded text-left ${
                                     isSelected 
-                                      ? 'bg-[#211a14] text-[#c9a15f] border-l-2 border-[#c9a15f]' 
-                                      : 'text-[#69615a] hover:text-[#f7f4f0]'
+                                      ? 'bg-bg-secondary text-accent-gold border-l-2 border-accent-gold' 
+                                      : 'text-text-secondary hover:text-text-primary'
                                   }`}
                                 >
                                   <span className="truncate">{child.name}</span>
@@ -356,30 +356,30 @@ function App() {
                   })}
                 </div>
                 
-                <div className="p-2 border-t border-[#2c2520] bg-[#0d0b0a] text-[#69615a] text-[8px] text-center font-mono">
+                <div className="p-2 border-t border-border-subtle bg-bg-code text-text-secondary text-[8px] text-center font-mono">
                   68 objects · 121 edges
                 </div>
               </div>
 
               {/* Right Detail Pane */}
-              <div className="flex-1 flex flex-col bg-[#131110] border border-[#2c2520] rounded min-w-0">
+              <div className="flex-1 flex flex-col bg-bg-panel border border-border-subtle rounded min-w-0">
                 {selectedObject ? (
                   <div className="flex-1 flex flex-col min-h-0 overflow-y-auto p-5 space-y-5">
                     
                     {/* Header */}
-                    <div className="border-b border-[#2c2520] pb-4 flex flex-col sm:flex-row justify-between sm:items-center gap-3">
+                    <div className="border-b border-border-subtle pb-4 flex flex-col sm:flex-row justify-between sm:items-center gap-3">
                       <div>
                         <div className="flex items-center gap-1.5">
-                          <span className={`text-[8px] px-1 py-0.2 rounded border font-semibold ${selectedObject.type === 'measure' ? 'bg-[#0f2d24] border-[#10b981] text-[#34d399]' : 'bg-[#1e1a16] border-[#42372c] text-[#c9a15f]'}`}>
+                          <span className={`text-[8px] px-1 py-0.2 rounded border font-semibold ${selectedObject.type === 'measure' ? 'bg-brand-green-bg border-brand-green-border text-brand-green-text' : 'bg-bg-secondary border-border-subtle text-accent-gold'}`}>
                             {selectedObject.type.toUpperCase()}
                           </span>
-                          <span className="text-[#968a80] text-xs font-bold">{selectedObject.tableName}</span>
+                          <span className="text-text-secondary text-xs font-bold">{selectedObject.tableName}</span>
                         </div>
-                        <h2 className="text-base font-bold text-[#c9a15f] mt-1">{selectedObject.name}</h2>
+                        <h2 className="text-base font-bold text-accent-gold mt-1">{selectedObject.name}</h2>
                       </div>
                       <div className="text-right">
-                        <span className="text-[9px] text-[#69615a] font-mono block">SHA-256 FINGERPRINT</span>
-                        <code className="text-[9px] text-[#968a80] select-all bg-[#0d0b0a] px-1.5 py-0.5 rounded border border-[#2c2520] font-mono block mt-1 truncate max-w-[240px]">
+                        <span className="text-[9px] text-text-secondary font-mono block">SHA-256 FINGERPRINT</span>
+                        <code className="text-[9px] text-text-secondary select-all bg-bg-code px-1.5 py-0.5 rounded border border-border-subtle font-mono block mt-1 truncate max-w-[240px]">
                           {selectedObject.fingerprint}
                         </code>
                       </div>
@@ -388,8 +388,8 @@ function App() {
                     {/* Description */}
                     {selectedObject.description && (
                       <div className="space-y-1.5">
-                        <div className="text-[9px] text-[#968a80] uppercase tracking-wider font-bold">Description</div>
-                        <p className="text-xs text-[#f7f4f0] bg-[#0d0b0a] p-3 rounded border border-[#2c2520] leading-relaxed">
+                        <div className="text-[9px] text-text-secondary uppercase tracking-wider font-bold">Description</div>
+                        <p className="text-xs text-text-primary bg-bg-code p-3 rounded border border-border-subtle leading-relaxed">
                           {selectedObject.description}
                         </p>
                       </div>
@@ -398,9 +398,9 @@ function App() {
                     {/* DAX Formula */}
                     {selectedObject.type === 'measure' && selectedObject.formula && (
                       <div className="space-y-1.5">
-                        <span className="text-[9px] text-[#968a80] uppercase tracking-wider font-bold">DAX expression</span>
-                        <div className="bg-[#0d0b0a] border border-[#2c2520] rounded p-3 overflow-x-auto">
-                          <pre className="text-xs text-[#c9a15f] leading-5 whitespace-pre">
+                        <span className="text-[9px] text-text-secondary uppercase tracking-wider font-bold">DAX expression</span>
+                        <div className="bg-bg-code border border-border-subtle rounded p-3 overflow-x-auto">
+                          <pre className="text-xs text-accent-gold leading-5 whitespace-pre">
                             {selectedObject.cleanedFormula}
                           </pre>
                         </div>
@@ -410,41 +410,41 @@ function App() {
                     {/* Dependencies Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
                       
-                      <div className="border border-[#2c2520] rounded bg-[#0d0b0a] p-4 space-y-3">
-                        <div className="flex items-center gap-2 border-b border-[#2c2520] pb-2">
-                          <Workflow size={11} className="text-[#968a80]" />
-                          <span className="text-[9px] font-bold text-[#f7f4f0] uppercase tracking-wider">Upstream Dependencies ({selectedObject.upstream.length})</span>
+                      <div className="border border-border-subtle rounded bg-bg-code p-4 space-y-3">
+                        <div className="flex items-center gap-2 border-b border-border-subtle pb-2">
+                          <Workflow size={11} className="text-text-secondary" />
+                          <span className="text-[9px] font-bold text-text-primary uppercase tracking-wider">Upstream Dependencies ({selectedObject.upstream.length})</span>
                         </div>
                         {selectedObject.upstream.length > 0 ? (
                           <div className="space-y-1">
                             {selectedObject.upstream.map((dep, index) => (
-                              <div key={index} className="flex items-center justify-between text-xs py-1 px-2 bg-[#131110] rounded border border-[#2c2520]">
-                                <span className="text-[#f7f4f0]">{dep.name}</span>
-                                <span className="text-[8px] bg-[#1a1614] border border-[#2c2520] px-1 rounded text-[#c9a15f]">{dep.type}</span>
+                              <div key={index} className="flex items-center justify-between text-xs py-1 px-2 bg-bg-panel rounded border border-border-subtle">
+                                <span className="text-text-primary">{dep.name}</span>
+                                <span className="text-[8px] bg-bg-secondary border border-border-subtle px-1 rounded text-accent-gold">{dep.type}</span>
                               </div>
                             ))}
                           </div>
                         ) : (
-                          <div className="text-xs text-[#69615a] italic">No upstream semantic layers detected.</div>
+                          <div className="text-xs text-text-secondary italic">No upstream semantic layers detected.</div>
                         )}
                       </div>
 
-                      <div className="border border-[#2c2520] rounded bg-[#0d0b0a] p-4 space-y-3">
-                        <div className="flex items-center gap-2 border-b border-[#2c2520] pb-2">
-                          <AlertTriangle size={11} className="text-[#c95f5f]" />
-                          <span className="text-[9px] font-bold text-[#c95f5f] uppercase tracking-wider">Breakage Downstream ({selectedObject.downstream.length})</span>
+                      <div className="border border-border-subtle rounded bg-bg-code p-4 space-y-3">
+                        <div className="flex items-center gap-2 border-b border-border-subtle pb-2">
+                          <AlertTriangle size={11} className="text-brand-red-text" />
+                          <span className="text-[9px] font-bold text-brand-red-text uppercase tracking-wider">Breakage Downstream ({selectedObject.downstream.length})</span>
                         </div>
                         {selectedObject.downstream.length > 0 ? (
                           <div className="space-y-1">
                             {selectedObject.downstream.map((dep, index) => (
-                              <div key={index} className="flex items-center justify-between text-xs py-1 px-2 bg-[#211616] rounded border border-[#4f2424]">
-                                <span className="text-[#c95f5f] font-semibold">{dep.name}</span>
-                                <span className="text-[8px] bg-[#301616] border border-[#4f2424] px-1 rounded text-[#c95f5f]">{dep.type}</span>
+                              <div key={index} className="flex items-center justify-between text-xs py-1 px-2 bg-brand-red-bg/50 rounded border border-brand-red-border">
+                                <span className="text-brand-red-text font-semibold">{dep.name}</span>
+                                <span className="text-[8px] bg-brand-red-bg border border-brand-red-border px-1 rounded text-brand-red-text">{dep.type}</span>
                               </div>
                             ))}
                           </div>
                         ) : (
-                          <div className="text-xs text-[#69615a] italic">No downstream dependencies breakages mapped.</div>
+                          <div className="text-xs text-text-secondary italic">No downstream dependencies breakages mapped.</div>
                         )}
                       </div>
 
@@ -454,13 +454,13 @@ function App() {
                 ) : (
                   <div className="flex-1 flex items-center justify-center text-center p-8">
                     <div className="space-y-2">
-                      <Database size={24} className="text-[#2c2520] mx-auto" />
-                      <div className="text-xs text-[#968a80]">Select an object to see how it is defined and what depends on it.</div>
+                      <Database size={24} className="text-border-subtle mx-auto" />
+                      <div className="text-xs text-text-secondary">Select an object to see how it is defined and what depends on it.</div>
                     </div>
                   </div>
                 )}
                 
-                <div className="p-3 border-t border-[#2c2520] text-[#69615a] text-[9px] flex items-center justify-between bg-[#0e0c0b]">
+                <div className="p-3 border-t border-border-subtle text-text-secondary text-[9px] flex items-center justify-between bg-bg-secondary">
                   <span>Source TMDL: C:\git\QualityControl\QC_Metrics.tmdl</span>
                   <span>Extracted: 2026-08-24 16:15:31</span>
                 </div>
@@ -474,21 +474,21 @@ function App() {
             <div className="space-y-6 max-w-5xl">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h1 className="text-lg font-bold text-[#f7f4f0] tracking-wide">Business requirements</h1>
-                  <p className="text-[#968a80] mt-0.5 text-xs">Derived from the model by code, not written by a language model.</p>
+                  <h1 className="text-lg font-bold text-text-primary tracking-wide">Business requirements</h1>
+                  <p className="text-text-secondary mt-0.5 text-xs">Derived from the model by code, not written by a language model.</p>
                 </div>
 
                 {/* BRD/FRD tab selection */}
-                <div className="flex bg-[#131110] border border-[#2c2520] rounded p-0.5 select-none shrink-0 font-mono text-[9px] font-semibold">
+                <div className="flex bg-bg-panel border border-border-subtle rounded p-0.5 select-none shrink-0 font-mono text-[9px] font-semibold">
                   <button
                     onClick={() => setReqDocType('BRD')}
-                    className={`px-2 py-0.5 rounded transition-all ${reqDocType === 'BRD' ? 'bg-[#0f2d24] border border-[#10b981] text-[#34d399]' : 'text-[#69615a] hover:text-[#968a80]'}`}
+                    className={`px-2 py-0.5 rounded transition-all ${reqDocType === 'BRD' ? 'bg-brand-green-bg border border-brand-green-border text-brand-green-text' : 'text-text-secondary hover:text-text-primary'}`}
                   >
                     BRD
                   </button>
                   <button
                     onClick={() => setReqDocType('FRD')}
-                    className={`px-2 py-0.5 rounded transition-all ${reqDocType === 'FRD' ? 'bg-[#0f2d24] border border-[#10b981] text-[#34d399]' : 'text-[#69615a] hover:text-[#968a80]'}`}
+                    className={`px-2 py-0.5 rounded transition-all ${reqDocType === 'FRD' ? 'bg-brand-green-bg border border-brand-green-border text-brand-green-text' : 'text-text-secondary hover:text-text-primary'}`}
                   >
                     FRD
                   </button>
@@ -503,9 +503,9 @@ function App() {
                   { label: 'FROM A STRUCTURAL RULE', val: 5 },
                   { label: 'INFERRED - NEEDS A PERSON', val: 1, alert: true }
                 ].map((stat, i) => (
-                  <div key={i} className="p-3 bg-[#131110] border border-[#2c2520] rounded flex flex-col justify-between min-h-[65px]">
-                    <div className="text-[8px] text-[#968a80] tracking-wider uppercase font-semibold">{stat.label}</div>
-                    <div className={`text-xl font-bold mt-1 ${stat.alert ? 'text-[#c95f5f]' : 'text-[#f7f4f0]'}`}>
+                  <div key={i} className="p-3 bg-bg-panel border border-border-subtle rounded flex flex-col justify-between min-h-[65px]">
+                    <div className="text-[8px] text-text-secondary tracking-wider uppercase font-semibold">{stat.label}</div>
+                    <div className={`text-xl font-bold mt-1 ${stat.alert ? 'text-brand-red-text' : 'text-text-primary'}`}>
                       {stat.val}
                     </div>
                   </div>
@@ -514,13 +514,13 @@ function App() {
 
               {/* Show Filters */}
               <div className="flex items-center gap-2 text-[9px] font-semibold">
-                <span className="text-[#69615a] uppercase">SHOW</span>
-                <div className="flex border border-[#2c2520] rounded p-0.5 bg-[#131110]">
+                <span className="text-text-secondary uppercase">SHOW</span>
+                <div className="flex border border-border-subtle rounded p-0.5 bg-bg-panel">
                   {(['all', 'high', 'medium', 'low'] as const).map(f => (
                     <button
                       key={f}
                       onClick={() => setReqFilter(f)}
-                      className={`px-2 py-0.5 rounded uppercase ${reqFilter === f ? 'bg-[#1e1914] text-[#c9a15f]' : 'text-[#968a80] hover:text-[#f7f4f0]'}`}
+                      className={`px-2 py-0.5 rounded uppercase ${reqFilter === f ? 'bg-bg-secondary text-accent-gold font-bold' : 'text-text-secondary hover:text-text-primary'}`}
                     >
                       {f}
                     </button>
@@ -533,24 +533,24 @@ function App() {
                 {filteredRequirements.map(req => {
                   const isExpanded = !!expandedRequirements[req.id];
                   return (
-                    <div key={req.id} className="bg-[#131110] border border-[#2c2520] rounded hover:border-[#332b25] transition-all">
+                    <div key={req.id} className="bg-bg-panel border border-border-subtle rounded hover:border-bg-secondary transition-all">
                       <div className="p-4 flex flex-col sm:flex-row justify-between items-start gap-4">
                         <div className="space-y-1.5">
                           <div className="flex items-center gap-2">
-                            <span className="font-bold text-[#c9a15f]">{req.id}</span>
-                            <span className="text-[8px] bg-[#222] border border-[#2c2520] text-[#968a80] px-1.5 py-0.2 rounded font-mono">
+                            <span className="font-bold text-accent-gold">{req.id}</span>
+                            <span className="text-[8px] bg-bg-secondary border border-border-subtle text-text-secondary px-1.5 py-0.2 rounded font-mono">
                               {req.rule}
                             </span>
                           </div>
-                          <div className="text-xs text-[#f7f4f0] leading-relaxed" dangerouslySetInnerHTML={{ __html: req.textHtml }} />
-                          <p className="text-[11px] text-[#69615a] italic">{req.explanation}</p>
+                          <div className="text-xs text-text-primary leading-relaxed" dangerouslySetInnerHTML={{ __html: req.textHtml }} />
+                          <p className="text-[11px] text-text-secondary italic">{req.explanation}</p>
                         </div>
 
                         <div className="shrink-0 text-right">
                           <span className={`inline-block text-[8px] font-bold px-2 py-0.5 rounded border ${
-                            req.confidence === 'HIGH' ? 'bg-[#181d19] border-[#2c4f34] text-[#5f9c6f]' : 
-                            req.confidence === 'MEDIUM' ? 'bg-[#29221a] border-[#4f3d24] text-[#c9a15f]' : 
-                            'bg-[#301616] border-[#4f2424] text-[#c95f5f]'
+                            req.confidence === 'HIGH' ? 'bg-brand-green-bg border-brand-green-border text-brand-green-text' : 
+                            req.confidence === 'MEDIUM' ? 'bg-brand-yellow-bg border-brand-yellow-border text-brand-yellow-text' : 
+                            'bg-brand-red-bg border-brand-red-border text-brand-red-text'
                           }`}>
                             {req.confidence.toLowerCase()}
                           </span>
@@ -558,17 +558,17 @@ function App() {
                       </div>
 
                       {/* Expandable footers */}
-                      <div className="border-t border-[#2c2520] bg-[#0c0a09]">
+                      <div className="border-t border-border-subtle bg-bg-secondary">
                         <button
                           onClick={() => toggleReqExpand(req.id)}
-                          className="w-full flex items-center justify-between px-4 py-1.5 text-[#69615a] hover:text-[#968a80] text-[9px]"
+                          className="w-full flex items-center justify-between px-4 py-1.5 text-text-secondary hover:text-text-primary text-[9px]"
                         >
                           <span className="font-semibold">
                             {isExpanded ? '−' : '+'} bound to {req.boundObjects.length} object
                           </span>
                         </button>
                         {isExpanded && (
-                          <div className="px-6 py-2 border-t border-[#2c2520] bg-[#090807] space-y-1 font-mono text-[10px] text-[#968a80]">
+                          <div className="px-6 py-2 border-t border-border-subtle bg-bg-code space-y-1 font-mono text-[10px] text-text-secondary">
                             {req.boundObjects.map((obj, idx) => (
                               <div key={idx} className="hover:underline cursor-pointer" onClick={() => {
                                 setActiveScreen('model');
@@ -594,20 +594,20 @@ function App() {
           {activeScreen === 'reconcile' && (
             <div className="space-y-6 max-w-6xl">
               <div>
-                <h1 className="text-lg font-bold text-[#f7f4f0] tracking-wide">Cross-platform reconciliation</h1>
-                <p className="text-[#968a80] mt-0.5 text-xs">QualityControl against quality_control.duckdb</p>
+                <h1 className="text-lg font-bold text-text-primary tracking-wide">Cross-platform reconciliation</h1>
+                <p className="text-text-secondary mt-0.5 text-xs">QualityControl against quality_control.duckdb</p>
               </div>
 
               {/* 4 reconciliation stat cards */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 {[
-                  { label: 'DEFINED ON BOTH', val: 6, border: 'border-[#2c2520] text-[#f7f4f0]' },
-                  { label: 'DIVERGENT', val: 1, border: 'border-[#4f2424] text-[#c95f5f]' },
-                  { label: 'NEEDS REVIEW', val: 1, border: 'border-[#4f3d24] text-[#c9a15f]' },
-                  { label: 'CONSISTENT', val: 4, border: 'border-[#2c4f34] text-[#5f9c6f]' }
+                  { label: 'DEFINED ON BOTH', val: 6, border: 'border-border-subtle text-text-primary' },
+                  { label: 'DIVERGENT', val: 1, border: 'border-brand-red-border text-brand-red-text' },
+                  { label: 'NEEDS REVIEW', val: 1, border: 'border-brand-yellow-border text-brand-yellow-text' },
+                  { label: 'CONSISTENT', val: 4, border: 'border-brand-green-border text-brand-green-text' }
                 ].map((stat, i) => (
-                  <div key={i} className={`p-3 bg-[#131110] border rounded flex flex-col justify-between min-h-[65px] ${stat.border}`}>
-                    <div className="text-[8px] text-[#968a80] tracking-wider uppercase font-semibold">{stat.label}</div>
+                  <div key={i} className={`p-3 bg-bg-panel border rounded flex flex-col justify-between min-h-[65px] ${stat.border}`}>
+                    <div className="text-[8px] text-text-secondary tracking-wider uppercase font-semibold">{stat.label}</div>
                     <div className="text-xl font-bold mt-1 tabular-nums">{stat.val}</div>
                   </div>
                 ))}
@@ -615,7 +615,7 @@ function App() {
 
               {/* Divergent section */}
               <div className="space-y-3">
-                <div className="text-[9px] text-[#69615a] uppercase font-bold tracking-wider pb-1">
+                <div className="text-[9px] text-text-secondary uppercase font-bold tracking-wider pb-1">
                   Divergent — these will report different numbers (1)
                 </div>
                 {RECONCILE_METRICS.filter(m => m.status === 'divergent').map(metric => (
@@ -625,7 +625,7 @@ function App() {
 
               {/* Needs review section */}
               <div className="space-y-3">
-                <div className="text-[9px] text-[#69615a] uppercase font-bold tracking-wider pb-1">
+                <div className="text-[9px] text-text-secondary uppercase font-bold tracking-wider pb-1">
                   Needs review — differs, but may still agree (1)
                 </div>
                 {RECONCILE_METRICS.filter(m => m.status === 'needs review').map(metric => (
@@ -641,28 +641,28 @@ function App() {
               </div>
 
               {/* Only In lists columns */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-[#2c2520] pt-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-border-subtle pt-5">
                 
-                <div className="bg-[#131110] border border-[#2c2520] rounded p-4">
-                  <div className="text-[9px] font-bold text-[#c9a15f] uppercase border-b border-[#2c2520] pb-2 mb-2 tracking-wider">
+                <div className="bg-bg-panel border border-border-subtle rounded p-4">
+                  <div className="text-[9px] font-bold text-accent-gold uppercase border-b border-border-subtle pb-2 mb-2 tracking-wider">
                     ONLY IN POWER_BI ({RECONCILE_ONLY_POWERBI.length})
                   </div>
                   <div className="space-y-1 overflow-y-auto max-h-[250px] pr-2">
                     {RECONCILE_ONLY_POWERBI.map(item => (
-                      <div key={item} className="text-xs text-[#968a80] py-1 border-b border-[#1c1715] font-semibold">
+                      <div key={item} className="text-xs text-text-secondary py-1 border-b border-bg-primary font-semibold">
                         {item}
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="bg-[#131110] border border-[#2c2520] rounded p-4">
-                  <div className="text-[9px] font-bold text-[#968a80] uppercase border-b border-[#2c2520] pb-2 mb-2 tracking-wider">
+                <div className="bg-bg-panel border border-border-subtle rounded p-4">
+                  <div className="text-[9px] font-bold text-text-secondary uppercase border-b border-border-subtle pb-2 mb-2 tracking-wider">
                     ONLY IN WAREHOUSE ({RECONCILE_ONLY_WAREHOUSE.length})
                   </div>
                   <div className="space-y-1">
                     {RECONCILE_ONLY_WAREHOUSE.map(item => (
-                      <div key={item} className="text-xs text-[#69615a] py-1 border-b border-[#1c1715] font-mono">
+                      <div key={item} className="text-xs text-text-secondary py-1 border-b border-bg-primary font-mono">
                         {item}
                       </div>
                     ))}
@@ -679,13 +679,13 @@ function App() {
             <div className="space-y-6 max-w-4xl">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h1 className="text-lg font-bold text-[#f7f4f0] tracking-wide">Awaiting confirmation</h1>
-                  <p className="text-[#968a80] mt-0.5 text-xs">Review low-confidence inferred items needing human confirmation.</p>
+                  <h1 className="text-lg font-bold text-text-primary tracking-wide">Awaiting confirmation</h1>
+                  <p className="text-text-secondary mt-0.5 text-xs">Review low-confidence inferred items needing human confirmation.</p>
                 </div>
                 
                 <button
                   onClick={handleCopyQueue}
-                  className="flex items-center gap-1.5 px-3 py-1 bg-[#1e1914] border border-[#c9a15f] text-[#c9a15f] font-bold rounded hover:bg-[#2c221a] cursor-pointer"
+                  className="flex items-center gap-1.5 px-3 py-1 bg-bg-secondary border border-accent-gold text-accent-gold font-bold rounded hover:opacity-85 cursor-pointer"
                 >
                   <Copy size={11} />
                   <span>{copiedQueue ? 'COPIED!' : 'COPY THE QUEUE'}</span>
@@ -694,27 +694,27 @@ function App() {
 
               <div className="space-y-3">
                 {REVIEW_QUEUE.map(item => (
-                  <div key={item.id} className="bg-[#131110] border border-[#2c2520] rounded p-4 space-y-3">
-                    <div className="flex justify-between items-center border-b border-[#2c2520] pb-2">
+                  <div key={item.id} className="bg-bg-panel border border-border-subtle rounded p-4 space-y-3">
+                    <div className="flex justify-between items-center border-b border-border-subtle pb-2">
                       <div className="flex items-center gap-2">
-                        <span className="font-bold text-xs text-[#c9a15f]">{item.id}</span>
-                        <span className="text-[8px] bg-[#301616] text-[#c95f5f] px-1.5 py-0.2 rounded border border-[#4f2424] font-semibold">REVIEW</span>
+                        <span className="font-bold text-xs text-accent-gold">{item.id}</span>
+                        <span className="text-[8px] bg-brand-red-bg text-brand-red-text px-1.5 py-0.2 rounded border border-brand-red-border font-semibold">REVIEW</span>
                       </div>
-                      <span className="text-[9px] text-[#69615a] uppercase font-bold">{item.rule}</span>
+                      <span className="text-[9px] text-text-secondary uppercase font-bold">{item.rule}</span>
                     </div>
 
                     <div className="space-y-2">
-                      <div className="text-xs text-[#f7f4f0] leading-relaxed" dangerouslySetInnerHTML={{ __html: item.textHtml }} />
-                      <div className="text-[11px] text-[#968a80] bg-[#0d0b0a] p-3 rounded border border-[#2c2520] font-mono leading-relaxed">
+                      <div className="text-xs text-text-primary leading-relaxed" dangerouslySetInnerHTML={{ __html: item.textHtml }} />
+                      <div className="text-[11px] text-text-secondary bg-bg-code p-3 rounded border border-border-subtle font-mono leading-relaxed">
                         {item.explanation}
                       </div>
                     </div>
 
-                    <div className="flex justify-between items-center text-[10px] pt-1.5 text-[#69615a]">
-                      <span className="font-mono bg-[#0d0b0a] border border-[#2c2520] px-2 py-0.5 rounded text-[#968a80]">
+                    <div className="flex justify-between items-center text-[10px] pt-1.5 text-text-secondary">
+                      <span className="font-mono bg-bg-code border border-border-subtle px-2 py-0.5 rounded text-text-primary">
                         {item.mapping}
                       </span>
-                      <span className="font-mono">hash: <code className="text-[#968a80]">{item.hash}</code></span>
+                      <span className="font-mono">hash: <code className="text-text-secondary">{item.hash}</code></span>
                     </div>
                   </div>
                 ))}
@@ -726,16 +726,16 @@ function App() {
 
         {/* RIGHT DOCKED COPILOT PANEL */}
         {isCopilotOpen && (
-          <aside className="w-[340px] border-l border-[#2c2520] bg-[#0b0a09] flex flex-col justify-between shrink-0 h-full relative">
+          <aside className="w-[340px] border-l border-border-subtle bg-bg-tertiary flex flex-col justify-between shrink-0 h-full relative">
             
-            <div className="p-3.5 border-b border-[#2c2520] bg-[#090807] flex items-center justify-between shrink-0 select-none">
+            <div className="p-3.5 border-b border-border-subtle bg-bg-tertiary flex items-center justify-between shrink-0 select-none">
               <div className="flex items-center gap-1.5">
-                <Sparkles size={11} className="text-[#c9a15f]" />
-                <span className="font-bold text-[#c9a15f] tracking-wider text-[10px] uppercase">COPILOT · QualityControl</span>
+                <Sparkles size={11} className="text-accent-gold" />
+                <span className="font-bold text-accent-gold tracking-wider text-[10px] uppercase">COPILOT · QualityControl</span>
               </div>
               <button 
                 onClick={() => setIsCopilotOpen(false)}
-                className="text-[#69615a] hover:text-[#968a80] text-[10px] font-bold border border-[#2c2520] px-1 rounded bg-[#0d0b0a] cursor-pointer"
+                className="text-text-secondary hover:text-text-primary text-[10px] font-bold border border-border-subtle px-1 rounded bg-bg-code cursor-pointer"
               >
                 ✕
               </button>
@@ -744,12 +744,12 @@ function App() {
             <div className="flex-1 overflow-y-auto p-4 space-y-4 select-text">
               
               {/* Intro Line */}
-              <div className="p-3 bg-[#131110] border border-[#2c2520] rounded space-y-2">
-                <p className="text-[10px] text-[#f7f4f0] leading-relaxed">
+              <div className="p-3 bg-bg-panel border border-border-subtle rounded space-y-2">
+                <p className="text-[10px] text-text-primary leading-relaxed">
                   Ask about this model. Answers come from the graph, not from memory.
                 </p>
-                <div className="space-y-1.5 pt-2 border-t border-[#2c2520]">
-                  <div className="text-[8px] text-[#69615a] uppercase font-bold tracking-widest">Example queries</div>
+                <div className="space-y-1.5 pt-2 border-t border-border-subtle">
+                  <div className="text-[8px] text-text-secondary uppercase font-bold tracking-widest">Example queries</div>
                   <div className="space-y-1">
                     {[
                       "What does OOS Rate measure?",
@@ -759,7 +759,7 @@ function App() {
                       <button
                         key={i}
                         onClick={() => handleCopilotSubmit(promptText)}
-                        className="w-full text-left text-[10px] text-[#c9a15f] hover:underline italic block py-0.5 transition-all cursor-pointer"
+                        className="w-full text-left text-[10px] text-accent-gold hover:underline italic block py-0.5 transition-all cursor-pointer"
                       >
                         "{promptText}"
                       </button>
@@ -775,19 +775,19 @@ function App() {
                     key={index} 
                     className={`flex flex-col space-y-1 ${message.sender === 'user' ? 'items-end' : 'items-start'}`}
                   >
-                    <span className="text-[8px] text-[#69615a] uppercase tracking-wider font-bold">
+                    <span className="text-[8px] text-text-secondary uppercase tracking-wider font-bold">
                       {message.sender === 'user' ? 'USER' : 'COPILOT'}
                     </span>
                     <div className={`p-2.5 rounded border leading-relaxed max-w-[95%] whitespace-pre-wrap ${
                       message.sender === 'user' 
-                        ? 'bg-[#1d1712] border-[#42372c] text-[#c9a15f]' 
-                        : 'bg-[#0d0b0a] border-[#2c2520] text-[#f7f4f0]'
+                        ? 'bg-bg-secondary border-border-subtle text-accent-gold' 
+                        : 'bg-bg-code border-border-subtle text-text-primary'
                     }`}>
                       {message.isThinking ? (
                         <div className="flex items-center gap-1.5 py-1">
-                          <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#c9a15f] animate-bounce" style={{ animationDelay: '0ms' }} />
-                          <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#c9a15f] animate-bounce" style={{ animationDelay: '150ms' }} />
-                          <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#c9a15f] animate-bounce" style={{ animationDelay: '300ms' }} />
+                          <span className="inline-block w-1.5 h-1.5 rounded-full bg-accent-gold animate-bounce" style={{ animationDelay: '0ms' }} />
+                          <span className="inline-block w-1.5 h-1.5 rounded-full bg-accent-gold animate-bounce" style={{ animationDelay: '150ms' }} />
+                          <span className="inline-block w-1.5 h-1.5 rounded-full bg-accent-gold animate-bounce" style={{ animationDelay: '300ms' }} />
                         </div>
                       ) : (
                         message.text
@@ -801,7 +801,7 @@ function App() {
             </div>
 
             {/* Input drawer box pinned */}
-            <div className="p-3 border-t border-[#2c2520] bg-[#090807] shrink-0 select-none">
+            <div className="p-3 border-t border-border-subtle bg-bg-tertiary shrink-0 select-none">
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
@@ -814,7 +814,7 @@ function App() {
                   placeholder="Ask about this model"
                   value={copilotInput}
                   onChange={(e) => setCopilotInput(e.target.value)}
-                  className="flex-1 bg-[#0d0b0a] border border-[#2c2520] rounded px-3 py-1.5 text-xs text-[#f7f4f0] focus:outline-none focus:border-[#c9a15f] placeholder-[#69615a] font-mono"
+                  className="flex-1 bg-bg-code border border-border-subtle rounded px-3 py-1.5 text-xs text-text-primary focus:outline-none focus:border-accent-gold placeholder-text-secondary font-mono"
                 />
               </form>
             </div>
@@ -834,14 +834,14 @@ interface ReconcileMetricRowProps {
 
 function ReconcileMetricRow({ metric }: ReconcileMetricRowProps) {
   return (
-    <div className="bg-[#131110] border border-[#2c2520] rounded p-4 space-y-3">
+    <div className="bg-bg-panel border border-border-subtle rounded p-4 space-y-3">
       
-      <div className="flex justify-between items-center border-b border-[#2c2520] pb-2 select-none">
-        <span className="font-bold text-xs text-[#f7f4f0]">{metric.name}</span>
+      <div className="flex justify-between items-center border-b border-border-subtle pb-2 select-none">
+        <span className="font-bold text-xs text-text-primary">{metric.name}</span>
         <span className={`text-[8px] font-bold px-1.5 py-0.2 rounded border uppercase ${
-          metric.status === 'consistent' ? 'bg-[#181d19] border-[#2c4f34] text-[#5f9c6f]' :
-          metric.status === 'needs review' ? 'bg-[#29221a] border-[#4f3d24] text-[#c9a15f]' :
-          'bg-[#301616] border-[#4f2424] text-[#c95f5f]'
+          metric.status === 'consistent' ? 'bg-brand-green-bg border-brand-green-border text-brand-green-text' :
+          metric.status === 'needs review' ? 'bg-brand-yellow-bg border-brand-yellow-border text-brand-yellow-text' :
+          'bg-brand-red-bg border-brand-red-border text-brand-red-text'
         }`}>
           {metric.status}
         </span>
@@ -851,22 +851,22 @@ function ReconcileMetricRow({ metric }: ReconcileMetricRowProps) {
         
         {/* Power BI panel */}
         <div className="space-y-1">
-          <div className="text-[8px] font-semibold text-[#69615a] uppercase">POWER_BI dax</div>
-          <div className="bg-[#0d0b0a] border border-[#2c2520] rounded p-3 min-h-[60px]">
-            <pre className="text-xs text-[#968a80] font-mono leading-relaxed whitespace-pre-wrap select-all">{metric.powerBi.code}</pre>
+          <div className="text-[8px] font-semibold text-text-secondary uppercase">POWER_BI dax</div>
+          <div className="bg-bg-code border border-border-subtle rounded p-3 min-h-[60px]">
+            <pre className="text-xs text-text-secondary font-mono leading-relaxed whitespace-pre-wrap select-all">{metric.powerBi.code}</pre>
             
-            <div className="mt-3 pt-2 border-t border-[#1c1715] text-[9px] text-[#69615a] flex gap-4 font-mono select-none">
+            <div className="mt-3 pt-2 border-t border-border-subtle text-[9px] text-text-secondary flex gap-4 font-mono select-none">
               <div>
                 <span className="font-bold">reads tables</span>
-                <span className="block text-[#c95f5f] font-semibold mt-0.5">{metric.powerBi.readsTables.join(', ')}</span>
+                <span className="block text-brand-red-text font-semibold mt-0.5">{metric.powerBi.readsTables.join(', ')}</span>
               </div>
               <div>
                 <span className="font-bold">reads columns</span>
-                <span className="block text-[#968a80] mt-0.5">{metric.powerBi.readsColumns.join(', ')}</span>
+                <span className="block text-text-secondary mt-0.5">{metric.powerBi.readsColumns.join(', ')}</span>
               </div>
               <div>
                 <span className="font-bold">aggregates</span>
-                <span className="block text-[#968a80] mt-0.5">{metric.powerBi.aggregates.join(', ')}</span>
+                <span className="block text-text-secondary mt-0.5">{metric.powerBi.aggregates.join(', ')}</span>
               </div>
             </div>
           </div>
@@ -874,22 +874,22 @@ function ReconcileMetricRow({ metric }: ReconcileMetricRowProps) {
 
         {/* Warehouse panel */}
         <div className="space-y-1">
-          <div className="text-[8px] font-semibold text-[#69615a] uppercase">WAREHOUSE sql</div>
-          <div className="bg-[#0d0b0a] border border-[#2c2520] rounded p-3 min-h-[60px]">
-            <pre className="text-xs text-[#968a80] font-mono leading-relaxed whitespace-pre-wrap select-all">{metric.warehouse.code}</pre>
+          <div className="text-[8px] font-semibold text-text-secondary uppercase">WAREHOUSE sql</div>
+          <div className="bg-bg-code border border-border-subtle rounded p-3 min-h-[60px]">
+            <pre className="text-xs text-text-secondary font-mono leading-relaxed whitespace-pre-wrap select-all">{metric.warehouse.code}</pre>
             
-            <div className="mt-3 pt-2 border-t border-[#1c1715] text-[9px] text-[#69615a] flex gap-4 font-mono select-none">
+            <div className="mt-3 pt-2 border-t border-border-subtle text-[9px] text-text-secondary flex gap-4 font-mono select-none">
               <div>
                 <span className="font-bold">reads tables</span>
-                <span className="block text-[#c95f5f] font-semibold mt-0.5">{metric.warehouse.readsTables.join(', ')}</span>
+                <span className="block text-brand-red-text font-semibold mt-0.5">{metric.warehouse.readsTables.join(', ')}</span>
               </div>
               <div>
                 <span className="font-bold">reads columns</span>
-                <span className="block text-[#968a80] mt-0.5">{metric.warehouse.readsColumns.join(', ')}</span>
+                <span className="block text-text-secondary mt-0.5">{metric.warehouse.readsColumns.join(', ')}</span>
               </div>
               <div>
                 <span className="font-bold">aggregates</span>
-                <span className="block text-[#968a80] mt-0.5">{metric.warehouse.aggregates.join(', ')}</span>
+                <span className="block text-text-secondary mt-0.5">{metric.warehouse.aggregates.join(', ')}</span>
               </div>
             </div>
           </div>
@@ -897,7 +897,7 @@ function ReconcileMetricRow({ metric }: ReconcileMetricRowProps) {
 
       </div>
 
-      <div className="text-[10px] text-[#69615a] pt-1.5 font-mono select-text">
+      <div className="text-[10px] text-text-secondary pt-1.5 font-mono select-text">
         {metric.callout}
       </div>
 

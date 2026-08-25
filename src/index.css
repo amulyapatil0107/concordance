@@ -3,16 +3,76 @@
 @theme {
   --font-sans: "JetBrains Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-tertiary: var(--bg-tertiary);
+  --color-border-subtle: var(--border-subtle);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-accent-gold: var(--accent-gold);
+  --color-bg-panel: var(--bg-panel);
+  --color-bg-code: var(--bg-code);
+  
+  --color-brand-green-text: var(--green-text);
+  --color-brand-green-bg: var(--green-bg);
+  --color-brand-green-border: var(--green-border);
+  
+  --color-brand-red-text: var(--red-text);
+  --color-brand-red-bg: var(--red-bg);
+  --color-brand-red-border: var(--red-border);
+  
+  --color-brand-yellow-text: var(--yellow-text);
+  --color-brand-yellow-bg: var(--yellow-bg);
+  --color-brand-yellow-border: var(--yellow-border);
 }
 
-/* Custom dark colors */
 :root {
   --bg-primary: #0d0b0a;
   --bg-secondary: #161311;
+  --bg-tertiary: #0b0a09;
   --border-subtle: #2c2520;
   --text-primary: #f7f4f0;
   --text-secondary: #968a80;
   --accent-gold: #c9a15f;
+  --bg-panel: #131110;
+  --bg-code: #0d0b0a;
+  
+  --green-text: #34d399;
+  --green-bg: #0c241c;
+  --green-border: #10b981;
+  
+  --red-text: #c95f5f;
+  --red-bg: #301616;
+  --red-border: #4f2424;
+  
+  --yellow-text: #c9a15f;
+  --yellow-bg: #29221a;
+  --yellow-border: #4f3d24;
+}
+
+.light {
+  --bg-primary: #f5f2eb;
+  --bg-secondary: #ebe7de;
+  --bg-tertiary: #e1dcd1;
+  --border-subtle: #c7c0b0;
+  --text-primary: #2c2520;
+  --text-secondary: #7c7263;
+  --accent-gold: #946927;
+  --bg-panel: #e2dcd0;
+  --bg-code: #fbf9f5;
+  
+  --green-text: #0f766e;
+  --green-bg: #ccfbf1;
+  --green-border: #14b8a6;
+  
+  --red-text: #b91c1c;
+  --red-bg: #fee2e2;
+  --red-border: #f87171;
+  
+  --yellow-text: #854d0e;
+  --yellow-bg: #fef9c3;
+  --yellow-border: #fbbf24;
 }
 
 body {
@@ -29,12 +89,12 @@ body {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0d0b0a;
+  background: var(--bg-primary);
 }
 ::-webkit-scrollbar-thumb {
-  background: #2c2520;
+  background: var(--border-subtle);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #c9a15f;
+  background: var(--accent-gold);
 }

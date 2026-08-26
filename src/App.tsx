@@ -20,11 +20,13 @@ import {
   RECONCILE_ONLY_WAREHOUSE,
   REVIEW_QUEUE,
   COPILOT_RESPONSES,
+  DRIFT_STATS,
+  DRIFT_ITEMS,
   type ModelObject
 } from './mockData';
 
 function App() {
-  const [activeScreen, setActiveScreen] = useState<'overview' | 'model' | 'requirements' | 'reconcile' | 'review'>('model');
+  const [activeScreen, setActiveScreen] = useState<'overview' | 'model' | 'requirements' | 'drift' | 'reconcile' | 'review'>('model');
   const [isCopilotOpen, setIsCopilotOpen] = useState(true);
   
   // Model Screen state
@@ -188,6 +190,7 @@ function App() {
               { id: 'overview', label: 'Overview' },
               { id: 'model', label: 'Model' },
               { id: 'requirements', label: 'Requirements' },
+              { id: 'drift', label: 'Drift' },
               { id: 'reconcile', label: 'Reconcile' },
               { id: 'review', label: 'Review' }
             ].map(item => {
@@ -587,7 +590,153 @@ function App() {
             </div>
           )}
 
-          {/* SCREEN 4: RECONCILE */}
+          {/* SCREEN 4: DRIFT */}
+          {activeScreen === 'drift' && (
+            <div className="space-y-6 max-w-5xl">
+              <div>
+                <h1 className="text-lg font-bold text-text-primary tracking-wide">Drift analysis</h1>
+                <p className="text-text-secondary mt-0.5 text-xs">Compare model baseline snapshot against active local extraction TMDL files.</p>
+              </div>
+
+              {/* Stats Row */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {[
+                  { label: 'DETECTED CHANGES', val: DRIFT_STATS.detectedChanges },
+                  { label: 'REAL LOGIC CHANGES', val: DRIFT_STATS.logicChanges },
+                  { label: 'HARMLESS RENAMES', val: DRIFT_STATS.renames },
+                  { label: 'STALE DOCUMENTS', val: DRIFT_STATS.staleDocs, alert: true }
+                ].map((stat, i) => (
+                  <div key={i} className="p-3 bg-bg-panel border border-border-subtle rounded flex flex-col justify-between min-h-[65px]">
+                    <div className="text-[8px] text-text-secondary tracking-wider uppercase font-semibold">{stat.label}</div>
+                    <div className={`text-xl font-bold mt-1 ${stat.alert ? 'text-accent-gold' : 'text-text-primary'}`}>
+                      {stat.val}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Real Logic Changes List */}
+              <div className="space-y-3">
+                <div className="text-[9px] text-text-secondary uppercase font-bold tracking-wider">
+                  Real Logic Changes — logic fingerprints mismatched (1)
+                </div>
+                
+                {DRIFT_ITEMS.filter(item => item.type === 'logic').map(item => (
+                  <div key={item.name} className="bg-bg-panel border border-border-subtle rounded p-4 space-y-3">
+                    <div className="flex justify-between items-start gap-4 border-b border-border-subtle pb-2">
+                      <div>
+                        <h3 className="font-bold text-xs text-brand-red-text">{item.name}</h3>
+                        <span className="text-[8px] bg-brand-red-bg text-brand-red-text border border-brand-red-border px-1.5 py-0.2 rounded font-semibold uppercase mt-1 inline-block">
+                          {item.status}
+                        </span>
+                      </div>
+                      <div className="text-right space-y-1">
+                        <div>
+                          <span className="text-[8px] text-text-secondary font-mono block">OLD SHA-256</span>
+                          <code className="text-[8px] text-text-secondary bg-bg-code px-1.5 py-0.2 rounded border border-border-subtle font-mono truncate max-w-[200px] inline-block">{item.oldFingerprint}</code>
+                        </div>
+                        <div>
+                          <span className="text-[8px] text-text-secondary font-mono block">NEW SHA-256</span>
+                          <code className="text-[8px] text-brand-red-text bg-brand-red-bg px-1.5 py-0.2 rounded border border-brand-red-border font-mono truncate max-w-[200px] inline-block">{item.newFingerprint}</code>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Code Diff Side by Side */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <div className="text-[8px] text-text-secondary uppercase font-semibold mb-1">Baseline Code</div>
+                        <div className="bg-bg-code border border-border-subtle rounded p-3 text-xs text-text-secondary overflow-x-auto whitespace-pre font-mono">
+                          {item.oldCode}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-[8px] text-text-secondary uppercase font-semibold mb-1">New Code</div>
+                        <div className="bg-bg-code border border-brand-red-border rounded p-3 text-xs text-brand-red-text overflow-x-auto whitespace-pre font-mono">
+                          {item.newCode}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Stale requirements mapped */}
+                    <div className="pt-2 border-t border-border-subtle text-[10px] text-text-secondary space-y-1">
+                      <div className="font-bold uppercase text-[8px] text-text-secondary">Impacted Documentation:</div>
+                      {item.affectedRequirements.map(req => (
+                        <div key={req.id} className="flex items-center gap-2">
+                          <span className="font-mono text-accent-gold underline cursor-pointer" onClick={() => {
+                            setActiveScreen('requirements');
+                            setReqFilter('all');
+                          }}>{req.id}</span>
+                          <span className="text-[8px] bg-brand-red-bg border border-brand-red-border text-brand-red-text px-1 py-0.2 rounded uppercase font-semibold">
+                            stale — logic modified (requires re-verification)
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Harmless Renames List */}
+              <div className="space-y-3">
+                <div className="text-[9px] text-text-secondary uppercase font-bold tracking-wider">
+                  Harmless Renames — logic identical, names modified (1)
+                </div>
+                
+                {DRIFT_ITEMS.filter(item => item.type === 'rename').map(item => (
+                  <div key={item.name} className="bg-bg-panel border border-border-subtle rounded p-4 space-y-3">
+                    <div className="flex justify-between items-start gap-4 border-b border-border-subtle pb-2">
+                      <div>
+                        <h3 className="font-bold text-xs text-brand-green-text">{item.name}</h3>
+                        <span className="text-[8px] bg-brand-green-bg text-brand-green-text border border-brand-green-border px-1.5 py-0.2 rounded font-semibold uppercase mt-1 inline-block">
+                          {item.status}
+                        </span>
+                      </div>
+                      <div className="text-right">
+                        <span className="text-[8px] text-text-secondary font-mono block">IDENTICAL SHA-256 FINGERPRINT</span>
+                        <code className="text-[8px] text-text-secondary bg-bg-code px-1.5 py-0.2 rounded border border-border-subtle font-mono truncate max-w-[240px] inline-block">{item.fingerprint}</code>
+                      </div>
+                    </div>
+
+                    {/* Code comparison side-by-side */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <div className="text-[8px] text-text-secondary uppercase font-semibold mb-1">Old Definition</div>
+                        <div className="bg-bg-code border border-border-subtle rounded p-3 text-xs text-text-secondary overflow-x-auto whitespace-pre font-mono">
+                          {item.oldCode}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-[8px] text-text-secondary uppercase font-semibold mb-1">New Definition</div>
+                        <div className="bg-bg-code border border-border-subtle rounded p-3 text-xs text-text-secondary overflow-x-auto whitespace-pre font-mono">
+                          {item.newCode}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Stale requirements mapped */}
+                    <div className="pt-2 border-t border-border-subtle text-[10px] text-text-secondary space-y-1">
+                      <div className="font-bold uppercase text-[8px] text-text-secondary">Impacted Documentation:</div>
+                      {item.affectedRequirements.map(req => (
+                        <div key={req.id} className="flex items-center gap-2">
+                          <span className="font-mono text-accent-gold underline cursor-pointer" onClick={() => {
+                            setActiveScreen('requirements');
+                            setReqFilter('all');
+                          }}>{req.id}</span>
+                          <span className="text-[8px] bg-brand-yellow-bg border border-brand-yellow-border text-brand-yellow-text px-1 py-0.2 rounded uppercase font-semibold">
+                            safe — rename only (update text labels only)
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+            </div>
+          )}
+
+          {/* SCREEN 5: RECONCILE */}
           {activeScreen === 'reconcile' && (
             <div className="space-y-6 max-w-6xl">
               <div>

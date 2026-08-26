@@ -467,3 +467,53 @@ Additionally, reconciling with the warehouse metric \`SELECT COUNT(*) FROM quali
 There is **1 inactive relationship** in the extracted TMDL model:
 - The join path between \`Batch\` and \`Calendar\` (\`Batch.BatchStartDate\` -> \`Calendar.DateKey\`) is marked **inactive**. It has been flagged in **REQ-B-58c38b** (Dimensional analysis) because it requires explicit activation inside DAX measures (e.g. using USERELATIONSHIP) and lacks clear descriptive metadata.`
 };
+
+export interface DriftItem {
+  type: 'logic' | 'rename';
+  name: string;
+  oldName?: string;
+  newName?: string;
+  status: string;
+  oldFingerprint?: string;
+  newFingerprint?: string;
+  fingerprint?: string;
+  oldCode?: string;
+  newCode?: string;
+  affectedRequirements: { id: string; action: 'verify' | 'update_wording' }[];
+}
+
+export const DRIFT_STATS = {
+  detectedChanges: 2,
+  logicChanges: 1,
+  renames: 1,
+  staleDocs: 2
+};
+
+export const DRIFT_ITEMS: DriftItem[] = [
+  {
+    type: 'logic',
+    name: 'OOS Rate',
+    status: 'fingerprint mismatch',
+    oldFingerprint: 'sha256:d8a2bc5f19ce9287c88b902ae8e7df09ef2b8a05c6d5b0aef1c2de95fef1095d',
+    newFingerprint: 'sha256:c119ee948bc88b9a2be7e7df09ef2b8a05c6d5b0aef1c2de95fef1066cd32e8',
+    oldCode: 'OOS Rate = DIVIDE([OOS Results], [Tests Performed], 0)',
+    newCode: 'OOS Rate = DIVIDE([OOS Results], [Tests Performed], BLANK())',
+    affectedRequirements: [
+      { id: 'REQ-F-00205', action: 'verify' }
+    ]
+  },
+  {
+    type: 'rename',
+    name: 'OOS Results ➔ OOS Tests',
+    oldName: 'OOS Results',
+    newName: 'OOS Tests',
+    status: 'logic identical',
+    fingerprint: 'sha256:c119ee948bc88b9a2be7e7df09ef2b8a04c6d5b0aef1c2de95fef1066cd32e8',
+    oldCode: "OOS Results = CALCULATE(COUNTROWS('TestResult'), 'TestResult'[ResultStatus] = \"Failed\")",
+    newCode: "OOS Tests = CALCULATE(COUNTROWS('TestResult'), 'TestResult'[ResultStatus] = \"Failed\")",
+    affectedRequirements: [
+      { id: 'REQ-B-58c38b', action: 'update_wording' }
+    ]
+  }
+];
+
